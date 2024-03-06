@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DB Converter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 20px;
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .w33p {
+      width: 33%;
+    }
+
+    .w50p {
+      width: 50%;
+    }
+
+    .h100p {
+      height: 100%;
+    }
+
+    .p10 {
+      padding: 10px;
+    }
+
+    .m0 {
+      margin: 0;
+    }
+
+    .fs14 {
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>DB 컬럼 변환</h2>
+  <div class="flex">
+    <div class="w50p h100p p10">
+      <label for="dbColumns">DB 컬럼 입력</label>
+      <p class="m0 fs14">(shift + enter = 변환)</p>
+      <p class="m0 fs14">(ctrl + enter = 복사)</p>
+      <textarea id="dbColumns" placeholder="여기에 DB 컬럼을 입력하세요..."></textarea>
+    </div>
+    <div class="w50p h100p p10">
+      <h3 class="m0">변환된 Java DTO 필드</h3>
+      <textarea id="javaDtoFields" disabled></textarea>
+    </div>
+  </div>
+  <div class="p10">
+    <button id="convertBtn">변환하기</button>
+    <button id="copyBtn">클립보드에 복사</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const KEY_CODE_ENTER = 13;
+
+      function enterKeyHandler(e) {
+        if (e.keyCode && e.keyCode === KEY_CODE_ENTER && e.ctrlKey) {
+          copyToClipboard();
+        }
+
+        if (e.keyCode && e.keyCode === KEY_CODE_ENTER && e.shiftKey) {
+          convertToDto();
+        }
+      }
+
+      function convertToDto() {
+        var dbColumns = document.getElementById('dbColumns').value.trim();
+        var javaDtoFields = '';
+
+        // DB 컬럼을 줄 단위로 분할하여 처리
+        var columnsArray = dbColumns.split('\n');
+        columnsArray.forEach(function (column, index) {
+          // 대문자 언더스코어 형식의 컬럼 이름을 카멜 케이스 형식의 Java 필드 이름으로 변환
+          var words = column.toLowerCase().split('_');
+          var fieldName = words[0];
+          for (var i = 1; i < words.length; i++) {
+            fieldName += words[i].charAt(0).toUpperCase() + words[i].slice(1);
+          }
+          // Java DTO 필드 생성
+          javaDtoFields += 'private String ' + fieldName + ';\n';
+        });
+
+        // 결과를 HTML에 표시
+        // document.getElementById('javaDtoFields').textContent = javaDtoFields;
+        document.getElementById('javaDtoFields').value = javaDtoFields;
+      }
+
+      function copyToClipboard() {
+        var javaDtoFields = document.getElementById('javaDtoFields').value;
+        // 클립보드에 텍스트 저장
+        navigator.clipboard.writeText(javaDtoFields).then(function () {
+          alert('클립보드에 복사되었습니다.');
+        }, function (err) {
+          console.error('클립보드에 복사할 수 없습니다.', err);
+        });
+      }
+
+      document.getElementById("dbColumns").addEventListener("keyup", enterKeyHandler);
+      document.getElementById("convertBtn").addEventListener("click", convertToDto);
+      document.getElementById("copyBtn").addEventListener("click", copyToClipboard);
+
+    })
+  </script>
+</body>
+
+</html>
