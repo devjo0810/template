@@ -1,0 +1,18 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDelete": false,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "eslint.codeActionsOnSave.rules": null,
+    "database-client.autoSync": true,
+    "git.autofetch": true
+}

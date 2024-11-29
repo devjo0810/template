@@ -25,7 +25,7 @@ const Sidebar = () => {
           width: isDrawerOpen ? drawerWidth : collapsedWidth,
           // transition: "width 0.3s",
           overflowX: "hidden",
-          paddingTop: "64px",
+          paddingTop: `${theme.layout.headerHeight}px`,
         },
       }}
     >

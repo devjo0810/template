@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Box, CssBaseline } from "@mui/material";
+import { Box } from "@mui/material";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-
+import { useTheme } from "@mui/material/styles";
 const Layout = ({ children }) => {
+  const theme = useTheme();
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <CssBaseline /> */}
 
       {/* 헤더 */}
       <Header />
@@ -21,8 +20,7 @@ const Layout = ({ children }) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          marginTop: "64px",
-          marginLeft: "64px",
+          marginTop: `${theme.layout.headerHeight}px`,
         }}
       >
         {children}

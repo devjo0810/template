@@ -23,8 +23,8 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, height: "64px", backgroundColor: "#fff", boxShadow: 3 }}>
-      <Toolbar sx={{ padding: 0 }}>
+    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <Toolbar>
         {/* 메뉴 버튼 */}
         <IconButton
           color="black"
@@ -36,7 +36,7 @@ const Header = () => {
         </IconButton>
 
         {/* 애플리케이션 이름 */}
-        <Typography variant="h6" sx={{ flexGrow: 1, color: "black" }}>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
           My Application
         </Typography>
 
