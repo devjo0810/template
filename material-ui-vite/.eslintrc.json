@@ -36,7 +36,7 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off",
     "import/no-named-as-default-member": "off",
     "import/namespace": "off"
   },
@@ -45,7 +45,11 @@
       "version": "detect"
     },
     "import/resolver": {
-      "node": {
+      "node": false,
+      "alias": {
+        "map": [
+          ["@", "./src"]
+        ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }

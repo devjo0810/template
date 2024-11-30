@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Typography, Box, ButtonGroup, Button, Tooltip } from "@mui/material";
-import { Brightness4, Brightness7 } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
-import { useTheme } from "@mui/material/styles";
-import { Menu as MenuIcon } from "@mui/icons-material";
 import useLayoutStore from "@/store/layout";
+import { Brightness4, Brightness7, Menu as MenuIcon } from "@mui/icons-material";
+import { AppBar, Button, ButtonGroup, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
 
@@ -15,11 +13,6 @@ const Header = () => {
   // 언어 변경 함수
   const handleLanguageSwitch = (language) => {
     i18n.changeLanguage(language);
-  };
-
-  // 모드 변경 함수
-  const handleModeToggle = (mode) => {
-    toggleTheme(mode);
   };
 
   return (
@@ -41,12 +34,22 @@ const Header = () => {
         </Typography>
 
         {/* 언어 전환 버튼 */}
-        <ButtonGroup variant="outlined" aria-label="language switch" size="small">
+        <ButtonGroup
+          variant="outlined"
+          aria-label="language switch"
+          size="small"
+          sx={{
+            marginRight: "10px",
+          }}
+        >
           <Button
             onClick={() => handleLanguageSwitch("ko")}
             color={i18n.language === "ko" ? "primary" : "default"}
             sx={{
               fontSize: "0.8rem",
+              "&:hover": {
+                bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.5)",
+              },
               "&.Mui-disabled": {
                 backgroundColor: "#e0e0e0", // 비활성화 상태에서 배경색을 회색으로 설정
                 color: "#9e9e9e", // 텍스트 색상도 회색
@@ -61,6 +64,9 @@ const Header = () => {
             color={i18n.language === "en" ? "primary" : "default"}
             sx={{
               fontSize: "0.8rem",
+              "&:hover": {
+                bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.5)",
+              },
               "&.Mui-disabled": {
                 backgroundColor: "#e0e0e0", // 비활성화 상태에서 배경색을 회색으로 설정
                 color: "#9e9e9e", // 텍스트 색상도 회색
@@ -72,42 +78,26 @@ const Header = () => {
           </Button>
         </ButtonGroup>
 
-        {/* 라이트/다크 모드 버튼 */}
-        <ButtonGroup variant="outlined" aria-label="theme switch" size="small">
-          <Tooltip title="Light Mode" placement="bottom">
-            <Button
-              onClick={() => handleModeToggle("light")}
-              color={theme.palette.mode === "light" ? "primary" : "black"}
-              sx={{
-                fontSize: "1.2rem",
-                "&:hover": { backgroundColor: "transparent" },
-                "&.Mui-disabled": {
-                  color: "#9e9e9e", // 비활성화 상태에서 아이콘 색상도 회색으로 설정
-                },
-              }}
-              disabled={theme.palette.mode === "light"} // 이미 선택된 모드는 비활성화
-            >
-              <Brightness7 />
-            </Button>
-          </Tooltip>
+        {/* 테마 변경 버튼 */}
+        <Tooltip title={`Switch to ${theme.palette.mode === "light" ? "dark" : "light"} mode`}>
+          <IconButton
+            size="small"
+            onClick={toggleTheme}
+            sx={{
+              color: theme.palette.mode === "light" ? "#ffb74d" : "#80d8ff",
+              bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.8)",
+              borderRadius: "8px", // 사각형에 살짝 둥근 모서리
+              // padding: "8px 16px", // 버튼 크기 조정
+              "&:hover": {
+                bgcolor: theme.palette.mode === "light" ? "rgba(255, 255, 255, 0.9)" : "#00695c",
+                color: theme.palette.mode === "light" ? "#f57c00" : "#a7ffeb",
+              },
+            }}
+          >
+            {theme.palette.mode === "light" ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+        </Tooltip>
 
-          <Tooltip title="Dark Mode" placement="bottom">
-            <Button
-              onClick={() => handleModeToggle("dark")}
-              color={theme.palette.mode === "dark" ? "primary" : "default"}
-              sx={{
-                fontSize: "1.2rem",
-                "&:hover": { backgroundColor: "transparent" },
-                "&.Mui-disabled": {
-                  color: "#9e9e9e", // 비활성화 상태에서 아이콘 색상도 회색으로 설정
-                },
-              }}
-              disabled={theme.palette.mode === "dark"} // 이미 선택된 모드는 비활성화
-            >
-              <Brightness4 />
-            </Button>
-          </Tooltip>
-        </ButtonGroup>
       </Toolbar>
     </AppBar>
   );
