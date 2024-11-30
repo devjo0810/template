@@ -47,8 +47,10 @@ const Header = () => {
             color={i18n.language === "ko" ? "primary" : "default"}
             sx={{
               fontSize: "0.8rem",
+              color: theme.palette.mode === "light" && "black",
+              bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.8)",
               "&:hover": {
-                bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.5)",
+                bgcolor: theme.palette.mode === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.5)",
               },
               "&.Mui-disabled": {
                 backgroundColor: "#e0e0e0", // 비활성화 상태에서 배경색을 회색으로 설정
@@ -64,8 +66,10 @@ const Header = () => {
             color={i18n.language === "en" ? "primary" : "default"}
             sx={{
               fontSize: "0.8rem",
+              color: theme.palette.mode === "light" && "black",
+              bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.8)",
               "&:hover": {
-                bgcolor: theme.palette.mode === "light" && "rgba(255, 255, 255, 0.5)",
+                bgcolor: theme.palette.mode === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.5)",
               },
               "&.Mui-disabled": {
                 backgroundColor: "#e0e0e0", // 비활성화 상태에서 배경색을 회색으로 설정

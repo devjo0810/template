@@ -2,20 +2,6 @@ import { commonTheme } from "./commonTheme";
 import { commonComponents } from "./commonComponents";
 
 export const darkTheme = {
-  // palette: {
-  //   mode: 'dark',
-  //   primary: {
-  //     main: '#90caf9',
-  //   },
-  //   background: {
-  //     default: '#121212',
-  //     paper: '#1d1d1d',
-  //   },
-  //   text: {
-  //     primary: '#ffffff', // 기본 텍스트 색상
-  //     secondary: '#aaaaaa',
-  //   },
-  // },
   palette: {
     mode: "dark",
     primary: {
@@ -41,6 +27,10 @@ export const darkTheme = {
     },
     success: {
       main: "#66bb6a",
+    },
+    white: {
+      main: "#424242", // dark 모드에서 버튼 배경 (어두운 회색)
+      contrastText: "#ffffff", // dark 모드에서 버튼 텍스트 (흰색)
     },
     background: {
       default: "#121212", // 어두운 배경

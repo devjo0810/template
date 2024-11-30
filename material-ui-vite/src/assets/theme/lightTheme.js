@@ -2,20 +2,6 @@ import { commonTheme } from "./commonTheme";
 import { commonComponents } from "./commonComponents";
 
 export const lightTheme = {
-  // palette: {
-  //   mode: 'light',
-  //   primary: {
-  //     main: '#1976d2',
-  //   },
-  //   background: {
-  //     default: '#ffffff',
-  //     paper: '#f5f5f5',
-  //   },
-  //   text: {
-  //     primary: '#000000', // 기본 텍스트 색상
-  //     secondary: '#555555',
-  //   },
-  // },
   palette: {
     mode: "light",
     primary: {
@@ -41,6 +27,10 @@ export const lightTheme = {
     },
     success: {
       main: "#66bb6a",
+    },
+    white: {
+      main: "#ffffff", // 버튼 배경 색상
+      contrastText: "#000000", // 버튼 텍스트 색상 (검정색)
     },
     background: {
       default: "#f5f5f5", // 밝은 배경

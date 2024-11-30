@@ -2,11 +2,14 @@ import { Box } from "@mui/material";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { useTheme } from "@mui/material/styles";
+import { CommonProvider } from "@/context/CommonProvider";
+
 const Layout = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <CommonProvider>
+      <Box sx={{ display: "flex" }}>
 
       {/* 헤더 */}
       <Header />
@@ -24,8 +27,9 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
+        </Box>
       </Box>
-    </Box>
+    </CommonProvider>
   );
 };
 
